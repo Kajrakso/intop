@@ -1,0 +1,278 @@
+\section{Fundamental group, fundamental group of a product of spaces}
+06.03
+
+\begin{definition}[Simply connected]
+    A topological space \( X \) is simply connected
+    if it is path connected and \( \pi_1(X, x_0) \)
+    is trivial.
+\end{definition}
+
+\begin{example}
+   \( \mathbb{R}^n \) is simply connected.
+\end{example}
+
+\begin{definition}[Based space]
+   A based space is a pair \( (X, x_0) \) 
+   where \( X \) is a topological space
+   and \( x_0 \in X \) is a point.
+\end{definition}
+
+\begin{definition}[Based map]
+   A based map \( f: (X, x_0) \to (Y, y_0) \) 
+   is a continuous map such that \( f(x_0) = f(y_0) \).
+\end{definition}
+
+\begin{proposition}
+  \label{prop:based_grp_hom}
+  Let \( f: (X, x_0) \to (Y, y_0) \) be a
+  based map. Then there exists a group homomorphism
+  \[ f_* = \pi_1(f): \pi_1(X, x_0) \to \pi_1(Y, y_0) \]
+\end{proposition}
+
+\begin{proof}
+    IDEA: define \( f_*(\gamma) = f\circ \gamma \).
+    Show well-definedness and show that it is a grp. hom.
+    We define \( f_* = \pi_1(f) \) by 
+    \[
+      f_*(\gamma) = \left(\pi_1(f)\right)(\gamma) = f \circ \gamma
+    \]
+    This is a well defined map; take \( \gamma \simeq_p \gamma' \).
+    Then
+    \[
+      f \circ H: I \times I \to X \to Y
+    \]
+    is a homotopy of \( f_*(\gamma) \) and \( f_*(\gamma') \):
+    \begin{enumerate}
+      \item \( (f \circ H)(0, s) = (f \circ \gamma)(s)) \).
+      \item \( (f \circ H)(1, s) = (f \circ \gamma')(s) \).
+      \item \( (f \circ H)(t, 0) = f(x_0) = y_0 \).
+      \item \( (f \circ H)(t, 1) = f(x_0) = y_0 \).
+    \end{enumerate}
+    \( f_* \) is a homomorphism of groups.
+    Take \( \gamma_1, \gamma_2 \in \pi_1(X, x_0) \).
+    Then
+    \begin{align*}
+      f_*(\gamma_2) * (f_*(\gamma_1))
+      &= \begin{cases}
+        (f \circ \gamma_1) (2s)     & 0 \le s \le 1/2 \\
+        (f \circ \gamma_2) (2s - 1) & 1/2 \le s \le 1
+      \end{cases} = f_*(\gamma_2 * \gamma_1)
+    \end{align*}
+\end{proof}
+
+\subsection{Category theory}
+
+\begin{definition}[Category]
+   A category \( \mathcal{C} \) is
+   given by the following
+   \begin{itemize}
+      \item a set of objects \( \text{ob}(\mathcal{C}) \).
+       Notation: \( X \in \mathcal{C} \) means \( X \in \text{ob}(\mathcal{C}) \).
+      \item for every object pair \( X, Y \in \text{ob}(\mathcal{C}) \)
+        a set \( \mathcal{C}(X, Y) \) of morphisms from \( X \) to \( Y \).
+      \item for every \( X, Y, Z \in \mathcal{C} \) a map
+        \begin{align*}
+          \mathcal{C}(X, Y) \times \mathcal{C}(Y, Z) &\to \mathcal{C}(X, Z) \\
+          (f, g) &\mapsto g \circ f
+        \end{align*}
+      \item Composition of morphisms is associative.
+      \item For all \( X \in \mathcal{C} \) there exists a morphism
+          \( I_x \in \mathcal{C}(X, X) \) called the identity such that
+          \[
+            I_x \circ f = f, g \circ I_x = g
+          \]
+          for all \( f: a \to X \), \( g: X \to b \).
+   \end{itemize}
+\end{definition}
+
+\begin{example}
+    Let \textbf{Set} be the category whose objects are sets
+    and whose morphisms are functions.
+\end{example}
+
+\begin{example}
+    Let \textbf{Top} be the category whose objects are topological spaces
+    and whose morphisms are continuous functions.
+\end{example}
+
+\begin{example}
+    Let \textbf{Grp} be the category whose objects are groups
+    and whose morphisms are group homomorphisms.
+\end{example}
+
+\begin{example}
+    Let \( \textbf{Top}_* \) be the category whose objects are based spaces
+    and whose morphisms are based maps.
+\end{example}
+
+\begin{definition}[isomorphism]
+   Let \( \mathcal{C} \) be a category.
+   A morphism \( f: X \to Y \) is an isomorphism
+   if there exists a morphism \( g: Y \to  X \) such that
+   \begin{align*}
+     f \circ g &= I_Y \\
+     g \circ f &= I_X
+   \end{align*}
+\end{definition}
+
+\begin{definition}[functor]
+   Let \( \mathcal{C}, \mathcal{D} \) be categories.
+   A functor
+   \[
+    F: \mathcal{C} \to \mathcal{D}
+   \]
+   is given by functions
+   \begin{align*}
+     \text{ob}(\mathcal{C}) &\longrightarrow \text{ob}(D) \\
+      c &\longmapsto F(c) \\
+    \end{align*}
+    and
+    \begin{align*}
+      \mathcal{C}(C, Y) &\longrightarrow \mathcal{D}(F(X), F(Y)) \\
+      f &\longmapsto F(f)
+    \end{align*}
+    that satisfy
+    \begin{align*}
+      F(g \circ f) &= F(g) \circ F(f) \\
+      F(I_X) &= I_{F(X)}
+    \end{align*}
+\end{definition}
+
+\begin{lemma}
+  \label{lma:iso}
+    Let \( F: \mathcal{C} \to \mathcal{D} \) be a functor.
+    Then \( F \) preserves isomorphisms.
+\end{lemma}
+
+\begin{proof}
+   Let \( f \) be iso.
+   Then we have
+   \begin{align*}
+     F(I_X) &= I_{F(X)} = F(g \circ f) = F(g) \circ F(f) \\
+     F(I_Y) &= I_{F(Y)} = F(f \circ g) = F(f) \circ F(g)
+   \end{align*}
+   so \( F(f) \) iso.
+\end{proof}
+
+\begin{example}
+    There is a functor
+    \[
+      \mathbf{Grp} \xrightarrow{U} \mathbf{Set}
+    \]
+    that is forgetful.
+\end{example}
+
+\begin{theorem}
+    The fundamental group is a functor
+    \[
+      \pi_1: \mathbf{Top}_* \longrightarrow \mathbf{Grp}
+    \]
+\end{theorem}
+
+\begin{proof}
+  Given \( (X, x_0), (Y, y_0) \) based spaces
+  and \( f, g: (X, x_0) \to (Y, y_0) \) based maps.
+  Proposition \ref{prop:based_grp_hom} gives 
+  the group homomorphism we need:
+  \begin{align*}
+    \pi_1(f) = f_* : \pi_1(X, x_0) &\longrightarrow \pi_1(Y, y_0) \\
+    [\gamma] &\longmapsto [f \circ \gamma]
+  \end{align*} 
+  The identity map is sent to the identity map:
+% https://q.uiver.app/#q=WzAsNixbMCwwLCIoWCx4XzApIl0sWzIsMCwiKFgseF8wKSJdLFswLDIsIlxccGlfMShYLHhfMCkiXSxbMiwyLCJcXHBpXzEoWCx4XzApIl0sWzAsMywiW1xcZ2FtbWFdIl0sWzIsMywiW1xcdGV4dHtpZH0gXFxjaXJjIFxcZ2FtbWFdIl0sWzAsMSwiXFx0ZXh0e2lkfSJdLFsyLDMsIlxcdGV4dHtpZH0iLDJdLFs0LDUsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbNiw3LCJcXHBpXzEiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV1d
+\[\begin{tikzcd}
+	{(X,x_0)} && {(X,x_0)} \\
+	\\
+	{\pi_1(X,x_0)} && {\pi_1(X,x_0)} \\
+	{[\gamma]} && {[\text{id} \circ \gamma]}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{\text{id}}", from=1-1, to=1-3]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{\text{id}}"', from=3-1, to=3-3]
+	\arrow[maps to, from=4-1, to=4-3]
+	\arrow["{\pi_1}", shorten <=9pt, shorten >=9pt, Rightarrow, from=0, to=1]
+\end{tikzcd}\]
+and preserve compositions. Composing in \( \mathbf{Grp} \):
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXHBpXzEoWCwgeF8wKSJdLFsyLDAsIlxccGlfMShZLCB5XzApIl0sWzQsMCwiXFxwaV8xKFosIHpfMCkiXSxbMCwxLCJbXFxnYW1tYV0iXSxbMiwxLCJbZiBcXGNpcmMgXFxnYW1tYV0iXSxbNCwxLCJbZyBcXGNpcmMgZiBcXGNpcmMgXFxnYW1tYV0iXSxbMCwxLCJmXyoiXSxbMSwyLCJnXyoiXSxbMyw0LCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzQsNSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dXQ==
+\[\begin{tikzcd}
+	{\pi_1(X, x_0)} && {\pi_1(Y, y_0)} && {\pi_1(Z, z_0)} \\
+	{[\gamma]} && {[f \circ \gamma]} && {[g \circ f \circ \gamma]}
+	\arrow["{f_*}", from=1-1, to=1-3]
+	\arrow["{g_*}", from=1-3, to=1-5]
+	\arrow[maps to, from=2-1, to=2-3]
+	\arrow[maps to, from=2-3, to=2-5]
+\end{tikzcd}\]
+First composing in \(\textbf{Top}_*\):
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHBpXzEoWCwgeF8wKSJdLFs0LDAsIlxccGlfMShaLCB6XzApIl0sWzAsMSwiW1xcZ2FtbWFdIl0sWzQsMSwiWyhnIFxcY2lyYyBmKSBcXGNpcmMgXFxnYW1tYV0iXSxbMCwxLCIoZyBcXGNpcmMgZilfKiJdLFsyLDNdXQ==
+\[\begin{tikzcd}
+	{\pi_1(X, x_0)} &&&& {\pi_1(Z, z_0)} \\
+	{[\gamma]} &&&& {[(g \circ f) \circ \gamma]}
+	\arrow["{(g \circ f)_*}", from=1-1, to=1-5]
+	\arrow[from=2-1, to=2-5]
+\end{tikzcd}\]
+which are equal since, \( g \circ f \circ \gamma = (g \circ f) \circ \gamma\).
+\end{proof}
+
+\begin{corollary}
+    Let \( X, Y \) be topological spaces and suppose \( X \simeq Y \).
+    Then \( \forall x_0 \in X \) we have that
+    \( \pi_1(X, x_0) \simeq \pi_1(Y, f(x_0)) \).
+\end{corollary}
+
+\begin{proof}
+    Since \( X \simeq Y \), we have a homeomorphism \( f: X \to Y \).
+    This induces the map  
+    \begin{equation*}
+      \left(X, x_0\right) \to \left(Y, f(x_0)\right)
+    \end{equation*}
+    By lemma \ref{lma:iso} we get an isomorphism of groups
+    \( \pi_1(X, x_0) \simeq \pi_1(Y, f(x_0) )\).
+\end{proof}
+
+\begin{theorem}
+    Let \( (X, x_0), (Y, y_0) \) be based spaces.
+    Then there exists a canonical isomorphism of groups
+    \begin{equation}
+      \pi_1(X \times Y, (x_0, y_0)) \xrightarrow{\sim} \pi_1(X, x_0) \times \pi_1(Y, y_0)
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+The projection maps
+\begin{align*}
+  p_X: (X \times Y, (x_0, y_0)) &\to (X, x_0) \\
+  p_Y: (X \times Y, (x_0, y_0)) &\to (Y, y_0)
+\end{align*}
+and their images under \( \pi_1 \) induces a
+map
+\begin{align*}
+   \phi: \pi_1(X \times Y, (x_0, y_0)) \to \pi_1(X, x_0) \times \pi_1(Y, y_0)
+\end{align*}
+defined by
+\begin{align}
+  \phi([f]) = ([p_X \circ f], [p_Y \circ f]) = ([f_X], [f_Y])
+\end{align}
+\( \phi \) is a group homomorphism. Let \( [f], [f'] \in \pi_1(X \times Y, (x_0, y_0)) \).
+\begin{align*}
+  \phi([f] * [f']) &= ([p_X \circ (f*f')], [p_Y \circ (f*f')]) \\
+                   &= ([p_X \circ f] * [p_X \circ f'], [p_Y \circ f] * [p_Y \circ f']) \\
+                   &= ([p_X \circ f], [p_Y \circ f]) * ([p_X \circ f'], [p_Y \circ f']) \\
+                   &= \phi([f])*\phi([f'])
+\end{align*}
+Now we need to show that \( \phi \) is a bijection.
+First we show injectivity.
+Assume that \( \phi([f]) = ([f_X], [f_Y]) = ([c_{x_0}], [c_{y_0}]) \) is the identity.
+Let \( H_X, H_Y \) be the two path homotopies.
+The universal property of the product gives the map
+\begin{align*}
+  H: I \times I &\to X \times Y \\
+  (t, s) &\mapsto (H_X(t, s), H_Y(t, s))
+\end{align*}
+which is a path homotopy of \( f \simeq_p c_{(x_0, y_0)} \):
+\begin{align*}
+  H(t, 0) &= H(t, 1) = (H_X(t, 0), H_Y(t, 0)) = (H_X(t, 1), H_Y(t, 1)) = (x_0, y_0) \\
+  H(0, s) &= (H_X(0, s), H_Y(0, s)) = (f_X, f_Y) \\
+  H(1, s) &= (H_X(1, s), H_Y(1, s)) = (c_{x_0}, x_{y_0})
+\end{align*}
+Now we show surjectivity:
+Given \( ([\alpha], [\beta]) \in \pi_1(X, x_0) \times \pi_1(Y, y_0) \)
+we see that \( \phi([(\alpha, \beta)]) = ([\alpha], [\beta]) \).
+\end{proof}

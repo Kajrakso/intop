@@ -1,0 +1,143 @@
+\section{Homotopy lifting property covering spaces}
+28.03
+
+\begin{theorem}
+    Let \( p: E \to B \)
+    be a covering map and let
+    \( e_0 \in E \) such that \( p(e_0) = b_0 \).
+    Given a path \( \gamma: I \to B \)
+    such that \( \gamma(0) = b_0 \).
+    Then there exists a unique lift
+    \[
+      \tilde{\gamma}: I \to E
+    \]
+    such that \( \tilde{\gamma}(0) = e_0 \).
+\end{theorem}
+
+\begin{proof}
+    technical. todo.
+\end{proof}
+
+\begin{theorem}[Homotopy lifting property]
+  \label{thm:hom_lift}
+   Let \( p: E \to B \)  be a covering map
+   and let \( H: I \times I \to B \)
+   such that \( H(0, 0) = b_0 \), and
+   let \( e_0 \in E \) such that
+   \( p(e_0) = b_0 \).
+   Then there exists a unique lift
+   \( \tilde{H}: I \times I \to E \)
+   such that \( \tilde{H}(0, 0) = e_0 \).
+   Moreover, if \( H \) is a path homotopy
+   then so is \( \tilde{H} \).
+\end{theorem}
+
+\begin{proof}
+    technical. todo.
+\end{proof}
+
+\begin{proposition}
+    Let \( p: E \to B \) be a covering map.
+    Let \( e_0 \in E \) such that \( p(e_0) = b_0 \).
+    Then there exists an assignment
+    \begin{align}
+      \pi_1(B, b_0) &\longrightarrow  {p}^{-1} (b_0) \\
+      \gamma &\longmapsto \tilde{\gamma} (1)
+    \end{align}
+\end{proposition}
+
+\begin{proof}
+  \( \tilde{\gamma}(1) \in {p}^{-1} (b_0) \) since
+  \[
+    p(\tilde{\gamma}(1)) = \gamma(1) = \gamma(0) = b_0
+  \]
+  To show that the assignment
+  is well defined we pick two
+  path homotopic maps \( \gamma_1 \simeq_p \gamma_2 \).
+  We need to show that
+  \( \tilde{\gamma_1}(1) = \tilde{\gamma_2}(1)\).
+  Let \( H: I \times I \to B \) be a
+  path homotopy of \( \gamma_1 \) and 
+  \( \gamma_2 \).
+  Theorem \ref{thm:hom_lift}
+  gives a unique path homotopy
+  \[
+    \tilde{H}: I \times I \to E
+  \]
+  Note that
+  \begin{align*}
+    \tilde{H}(0, s) = \tilde{\gamma_1} \\
+    \tilde{H}(1, s) = \tilde{\gamma_2} \\
+  \end{align*}
+  Since \( \tilde{H} \) is a path homotopy
+  we have that \( \tilde{H}(t, 1) \) is
+  constant, so
+  \[
+    \tilde{H}(0, 1) = \tilde{\gamma_1}(1), 
+    \tilde{H}(1, 1) = \tilde{\gamma_2}(1)
+  \]
+  This means that \( \tilde{\gamma_1}(1)
+  = \tilde{\gamma_2}(1) \).
+
+\end{proof}
+
+\begin{definition}[Lifting correspondence]
+   The assignment
+   \[
+    \pi_1(B, b_0) \to {p}^{-1} (b_0)
+   \]
+   is called the lifting correspondence.
+\end{definition}
+
+\begin{theorem}
+    Let \( p: E \to B \) be a covering map.
+    Then the lifting correspondence is
+    \begin{enumerate}
+      \item surjective if \( E \) is path connected.
+      \item bijective if \( E \) is simply connected.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Let \( e_0 \in {p}^{-1} (b_0) \).
+    Since \( E \) is path connected I 
+    can pick a path
+    \[
+      \gamma: I \to E
+    \]
+    from \( e_0 \) to \( e_1 \).
+    \( \gamma \) is a lift of
+    \( p \circ \gamma \).
+    Hence \( (\widetilde{p \circ \gamma})(1) = \gamma(1) = e_1 \).
+    Hence, the lifting correspondence is surjective if
+    \( E \) is path connected.
+    
+    Let \( \gamma_1, \gamma_2 \in \pi_1(B, b_0) \) such that
+    \( \tilde{\gamma}_1(1) = \tilde{\gamma}_2(1) = e_1 \).
+    Consider the loop \[ {\tilde{\gamma}_2}^{-1} * \tilde{\gamma}_1 \]
+    Since \( {\tilde{\gamma}_2}^{-1} * \tilde{\gamma}_1 \) is a loop
+    and \( E \) is simply connected it is homotopic to the constant loop
+    at \( e_1 \).
+    This implies that
+    \[
+      p (\tilde{\gamma}_2^{-1} * \tilde{\gamma}_1) = \gamma_2^{-1} * \gamma_1
+    \]
+    is homotopic to the constant path at \( b_0 \).
+    Hence \( \gamma_1 \simeq_p \gamma_2 \), so
+    the lifting correspondence is also injective,  
+    and thus bijective.
+\end{proof}
+
+\begin{corollary}
+  \label{cor:S1_Z_bij}
+    There exists a bijection
+    \[
+      \pi_1(\mathbb{S}^1, *) \leftrightarrow \mathbb{Z}
+    \]
+\end{corollary}
+
+Next time we show that this bijection
+is a group homomorphism, and
+hence a group isomorphism.
+Also: Brouwer fixed point theorem
+and the fundamental theorem of algebra.

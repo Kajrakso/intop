@@ -1,0 +1,201 @@
+\section{Covering spaces}
+27.03
+
+\begin{definition}[Covering spaces]
+   A continuous surjective map
+   \( p: E \to B \) is a covering
+   map if for all \( b \in B \)
+   there exists a nbh. \( U_b \ni b \)
+   with the following properties:
+   \begin{equation}
+     {p}^{-1} (U_b) = \bigsqcup_{\lambda \in \Lambda} V_\lambda
+   \end{equation}
+  and 
+  \begin{equation}
+      p_{|V_\lambda}: V_\lambda \to U_b
+  \end{equation}
+  if a homeomorphism.
+  We say that \( U_b \) is an evenly
+  covered neighborhood.
+\end{definition}
+
+\begin{definition}[Fiber]
+   For every \( b \in B \) 
+   we call \( {p}^{-1} (b) \)
+   the fiber of \( p \) at \( b \).
+\end{definition}
+
+\begin{lemma}
+    Let \( p: E \to B \) be a covering map.
+    For all \( b \in B \), the fiber
+    \( {p}^{-1} (b) \) is a discrete space.
+\end{lemma}
+
+\begin{proof}
+    Let \( U_b \ni b \) be a nbh. that
+    is evenly covered.
+    Then 
+    \[
+      {p}^{-1} (b) \subseteq {p}^{-1} (U_b)
+      = \bigsqcup_{\lambda \in \Lambda} V_\lambda
+    \]
+    Claim: Each \( x \in {p}^{-1} (b) \) live
+    in exactly one of the \( V_\lambda \)-s.
+    Suppose there exists \( x, x' \in V_\lambda \).
+    Then
+    \[
+      p(x) = p(x') = b
+    \]
+    which is a contradiction since
+  \( p_{|_{V_\lambda}} \) is injective (it is a homeomorphism).
+    If \( {p}^{-1} (b) \cap V_\lambda = \emptyset \) 
+    then \( p_{|_{V_\lambda}} \) cannot be surjective.
+    Hence \( {p}^{-1} (b) \cap V_\lambda = \{ x_\lambda \}  \).
+    Hence
+    \[
+      {p}^{-1} (b) = \bigsqcup_{\lambda \in \Lambda}
+      \{ x_\lambda \}
+    \]
+\end{proof}
+
+\begin{example}
+    Given a homeomorphism \( p: E \to B \).
+    Then \( p \) is a covering map.
+\end{example}
+
+\begin{example}
+    Let \( F \) be a discrete space.
+    Then the projection map
+    \[
+      \pi_X: X \times F \to X
+    \]
+    is a covering map.
+\end{example}
+
+\begin{proof}
+  \( {\pi_X}^{-1}(U_b) = U_b \times F \simeq \bigsqcup_{f \in F} U_b  \) .
+\end{proof}
+
+\begin{definition}[Local homeomorphism]
+    A continuous map \( f: X \to Y \) 
+    is a local homeomorphism if 
+    for all \( x \in X \) there exists
+    a nbh. \( U_x \ni x \) s.t.
+    \[
+      f_{|U_x}: U_x \to f(U_x)
+    \]
+    is a homeomorphism.
+\end{definition}
+
+\begin{proposition}
+   If \( p: E \to B \)  is a covering map,
+   then \( p \) is a local homeomorphism.
+\end{proposition}
+
+\begin{proof}
+  Let \( U_{p(e)} \ni p(e)  \) be an 
+  evenly covered neighborhood.
+  Then
+  \[
+    {p}^{-1} (U_{p(e)}) \simeq
+    \bigsqcup_{\lambda \in \Lambda} V_\lambda \ni e
+  \]
+  We know that there exists a unique 
+  \( \lambda_0 \) such that \( e \in V_\lambda \).
+  Then
+  \[
+    p_{|_{V_{\lambda_0}}}: V_{\lambda_0} \longrightarrow U_{p(e)}
+  \]
+  is a homeomorphism.
+\end{proof}
+
+\begin{theorem}
+    The map 
+    \begin{align}
+      p: \mathbb{R} &\to \mathbb{S}^1 \\
+      t &\mapsto (\cos(2\pi t), \sin(2\pi t))
+    \end{align}
+    is a covering map.
+\end{theorem}
+
+\begin{proof}
+    Let \( U = \mathbb{S}^1 \setminus \{ (1, 0) \}  \)
+    and \( V = \mathbb{S}^1 \setminus \{ (-1, 0) \}  \).
+    It suffices to show that
+    \( U, V \) are evenly covered.
+    \begin{align*}
+      {p}^{-1} (U) &= \bigsqcup_{\lambda \in \mathbb{Z}} (\lambda, \lambda + 1) \\
+      {p}^{-1} (V) &= \bigsqcup_{\lambda \in \mathbb{Z}} (\lambda - \frac{1}{2}, \lambda + \frac{1}{2}) \\
+    \end{align*}
+
+    NTS: \( p_\lambda: (\lambda, \lambda + 1) \to \mathbb{S}^1 \setminus \{ (1, 0) \}  \)
+    is a homeomorphism.
+\end{proof}
+
+\begin{theorem}
+    Let \( p_1: E_1 \to B_1 \) and \( p_2: E_2 \to B_2 \)
+    be covering maps.
+    Then 
+    \[
+      p_1 \times p_2: E_1 \times E_2 \to B_1 \times B_2
+    \]
+    is a covering map.
+\end{theorem}
+
+\begin{proof}
+    Let \( (b_1, b_2) \in B_1 \times B_2 \).
+    Let \( U_{b_1} \ni b_1, V_{b_2} \ni b_2 \)
+    be evenly covered neighborhoods.
+    That is,
+    \begin{align*}
+      {p_1}^{-1} (U_{b_1}) &= \bigsqcup_{\lambda \in \Lambda}
+      V_\lambda \\
+      {p_1}^{-1} (V_{b_2}) &= \bigsqcup_{\omega \in \Omega}
+      W_\omega \\
+    \end{align*}
+    Then
+    \[
+      {p_1 \times p_2}^{-1} (U_{b_1} \times V_{b_2})
+      = \bigsqcup_{\lambda \in \Lambda, \omega \in \Omega} V_\lambda \times W_\omega
+    \]
+    and
+    \[
+      \left(p_1 \times p_2\right)_{|_{V_\lambda \times W_\omega}}
+      : V_\lambda \times W_\omega \to U_{b_1} \times V_{b_2}
+    \]
+    is a homeomorphism since it is a product of homeomorphisms.
+\end{proof}
+
+\begin{definition}[Lift]
+  Let \( p: E \to B \) be any map
+  and let \( f: X \to B \).
+  We say that \( \tilde{f}: X \to E \)
+  is a lift of \( f \) if \( p \circ \tilde{f} = f \).
+
+  % https://q.uiver.app/#q=WzAsMyxbMCwyLCJYIl0sWzIsMiwiQiJdLFsyLDAsIkUiXSxbMCwxLCJmIiwyXSxbMiwxLCJwIl0sWzAsMiwiXFx0aWxkZXtmfSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+\[\begin{tikzcd}
+	&& E \\
+	\\
+	X && B
+	\arrow["p", from=1-3, to=3-3]
+	\arrow["{\tilde{f}}", dashed, from=3-1, to=1-3]
+	\arrow["f"', from=3-1, to=3-3]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{lemma}[Lebesgue number lemma]
+   Let \( (X, d) \) be a compact metric space
+   and let \( \{ U_\alpha  \}_{\alpha \in A}  \)
+   be an open cover.
+   Then there exists some \( \lambda > 0  \)
+   s.t. \( \forall x \in X \)
+   there exists some \( U_\alpha \) in 
+   the cover such that
+   \( B(x, \lambda) \subseteq U_\alpha \).
+\end{lemma}
+
+\begin{proof}
+    technical: todo.
+\end{proof}
+
+

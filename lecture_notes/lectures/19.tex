@@ -1,0 +1,323 @@
+\section{Homotopy equivalences and the fundamental group}
+20.03
+
+\begin{definition}
+    Let \( f,g: (X, x_0) \to (Y, y_0) \) be based maps
+    We say that a homotopy
+    \[
+      H: I \times X \to Y
+    \]
+    is a based homotopy if \( H(t, x_0) = y_0 \)
+    for all \( t \).
+\end{definition}
+
+\begin{lemma}
+  \label{lma:based_maps_homotopic}
+    Let \( f, g: (X, x_0) \to (Y, y_0) \)
+    be based maps which are homotopic via
+    a based homotopy. Then
+    \[
+      \pi_1 (f) = \pi_1(g)
+    \]
+\end{lemma}
+
+\begin{proof}
+    Let \( \gamma \in \pi_1(X, x_0) \).
+    We need to show that \( f_*(\gamma) \simeq_p g_*(\gamma) \).
+    That is, there exists a path homotopy
+    for \( f \circ \gamma \) and \( g \circ \gamma \).
+    Let \( H: I \times X \to X \) be a based homotopy
+    for \( f \) and \( g \).
+    Then
+    \[
+      \hat{H}: I \times I \xrightarrow{\text{id} \times \gamma}
+      I \times X \xrightarrow{H} Y
+    \]
+    is this path homotopy.
+    \begin{enumerate}
+      \item \( \hat{H}(0, s) = H(0, \gamma(s)) = (f \circ \gamma) (s) \)
+      \item \( \hat{H}(1, s) = H(1, \gamma(s)) = (g \circ \gamma) (s) \)
+      \item \( \hat{H}(t, 0) = H(t, \gamma(0)) = y_0 \)
+      \item \( \hat{H}(t, 1) = H(t, \gamma(1)) = )y_0 \)
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}[retract, retraction]
+   Let \( A \subseteq X \) be a subspace.
+   We say that \( A \) is a retract of \( X \)
+   if there exists a map
+   \[
+    r: X \to A
+   \]
+   such that \( r \circ \iota = \text{id}_A \).
+   We call \( r \) a retraction.
+\end{definition}
+
+
+\begin{example}
+   Consider \( \mathbb{S}^1 \subseteq \mathbb{R}^2 \setminus \{ (0, 0) \}  \) .
+   Then \( r(x) = x / \lvert \lvert x \rvert \rvert \) is a retraction.
+\end{example}
+
+\begin{lemma}
+  \label{lma:retract->inj}
+  Let \( x_0 \in A \subseteq X  \), and suppose
+  that \( A \) is a retract of \( X \).
+  Then the induced group homomorphism
+  \[
+    \pi_1(A, x_0) \longrightarrow \pi_1(X, x_0)
+  \]
+  is injective.
+\end{lemma}
+
+\begin{proof}
+   Let \( r: X \to A \) be a retraction.
+    Since \( x_0 \in A \) then \( r(x_0) = x_0 \).
+    I get group homomorphisms
+    \begin{equation}
+      \pi_1(A, x_0) \xrightarrow{\pi_1(\iota)} \pi_1(X, x_0)
+      \xrightarrow{\pi_1(r)} \pi_1(A, x_0)
+    \end{equation}
+    That compose to the identity: \( \pi_1(r) \circ \pi_1(\iota) = id \).
+    Since the composite is injective, \( \pi_1(\iota) \) is injective.
+\end{proof}
+
+\begin{definition}[deformation retract]
+    Let \( A \subseteq X \) be a subspace.
+    A homotopy
+    \[
+      H: I \times X \to X
+    \]
+    is a deformation retract if the following holds
+    \begin{enumerate}
+      \item \( H(0, x) = x \)
+      \item \( H(1, x) \in A \)
+      \item \( H(t, a) = a, \forall a \in A \)
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+   A deformation retract is a retract. 
+\end{remark}
+
+\begin{proof}
+    Let \( A \subseteq X \) and \( H: I\times X \to X \)
+    be a deformation retract. Then we get the retract
+    \( r: X \to A \) by
+    \[
+      H(1, x): X \xrightarrow{r} A \xrightarrow{\iota} X
+    \]
+
+\end{proof}
+
+\begin{theorem}
+    Let \( x_0 \in A \subseteq X \) and suppose
+    that \( A \) is a deformation retract of \( X \).
+    Then we have a group isomorphism
+    \[
+      \pi_1(\iota): \pi_1(A, x_0) \to \pi_1(X, x_0)
+    \]
+\end{theorem}
+
+\begin{proof}
+  My notes here are hardly intelligible, so I provide
+  my own proof. (I think this is what Fernando wrote).
+
+  By lemma \ref{lma:retract->inj}
+  \( \pi_1(\iota) \) is an injective group homomorphism.
+  We need to show that it is surjective, i.e. that
+  \( \pi_1(\iota) \circ \pi_1(r) = \text{id}  \).
+  Let \( H: I \times X \to X \) be the
+  deformation retract.
+  Let \( H(1, x) = r: X \to A \) denote the retract.
+  Now, \( H \) is a based homotopy of \( \text{id} \) and
+  \( r \circ \iota  \):
+  \begin{align*}
+    H(t, x_0) &= x_0 & \text{since \( x_0 \in A \). } \\
+    H(0, x) &= x \\
+    H(1, x) &= \left(\iota \circ r\right)(x)
+  \end{align*}
+  By lemma \ref{lma:based_maps_homotopic}
+  \( \pi_1(\iota) \circ \pi_1(r) = \text{id} \),
+  so \( \pi_1(\iota) \) is surjective.
+
+  Hence, \( \pi_1(\iota) \) is an isomorphism
+  of groups.
+\end{proof}
+
+\begin{exercise}
+    Show that \( \mathbb{S}^1 \subseteq \mathbb{R}^2 \setminus \{ (0, 0) \}  \)
+    is a deformation retract.
+\end{exercise}
+
+\begin{definition}[homotopy equivalence]
+    A map \( f: X \to Y \) is a homotopy equivalence
+    if there exists a continuous map
+    \[
+      g: Y \to X
+    \]
+    such that \( g \circ f \sim \text{id}_X \)
+    and \( f \circ g \sim \text{id}_Y \).
+\end{definition}
+
+\begin{example}
+  Let \( A \subseteq X \) be a deformation retract.
+  Then \( \iota: A \to X \) is a homotopy equivalence.
+\end{example}
+
+\begin{example}
+    \( 0 \in \mathbb{R}^n \). \( \mathbb{R}^n \sim * \).
+\end{example}
+
+\begin{definition}[Contractible space]
+   A space is said to be contractible
+   if it is homotopy equivalent to
+   the point space.
+\end{definition}
+
+\begin{definition}[homotopy type]
+    We say that \( X \) and \( Y \)
+    have the same homotopy type if \( X \)
+    is homotopy equivalent to \( Y \).
+    Notation:
+    \[
+      [X] = \{ Y \text{top. space} \mid X \text{ homotopic equivalent to } Y \} 
+    \]
+\end{definition}
+
+\begin{example}
+  \( [\mathbb{R}^n] = [*] \).
+\end{example}
+
+\begin{lemma}
+  \label{lma:hom_diag_lemma}
+    Let \( f, g: X \to Y \) be maps.
+    Suppose \( H \) is a homotopy
+    \[
+      H: I \times X \to Y
+    \]
+    between \( f, g \).
+    Given \( x_0 \in X \), and let
+    \[
+      \alpha = H(\cdot, x_0): I \to X
+    \]
+    Then we have a commutative diagram 
+    of groups:
+
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHBpXzEoWCwgeF8wKSJdLFsyLDIsIlxccGlfMShZLCBnKHhfMCkpIl0sWzIsMCwiXFxwaV8xKFksIGYoeF8wKSkiXSxbMCwxLCJcXHBpXzEoZykiLDJdLFswLDIsIlxccGlfMShmKSJdLFsyLDEsIlxcaGF0e1xcYWxwaGF9Il1d
+\[\begin{tikzcd}
+	{\pi_1(X, x_0)} && {\pi_1(Y, f(x_0))} \\
+	\\
+	&& {\pi_1(Y, g(x_0))}
+	\arrow["{\pi_1(f)}", from=1-1, to=1-3]
+	\arrow["{\pi_1(g)}"', from=1-1, to=3-3]
+	\arrow["{\hat{\alpha}}", from=1-3, to=3-3]
+\end{tikzcd}\]
+where \( \hat{\alpha}([\gamma]) = [\alpha * \gamma * \overline{\alpha}] \).
+\end{lemma}
+
+\begin{proof}
+   We need to show that
+   \( \hat{\alpha} \circ \pi_1(f) = \pi_1(g) \).
+   That is;
+   \[
+     [\alpha * (f \circ \gamma) * \overline{\alpha}]
+     = [g \circ \gamma]
+   \]
+   for all \( \gamma \in \pi_1(X, x_0) \).
+  Let \( \gamma  \) be a loop based at \( x_0 \).
+  Define
+  \begin{equation}
+      H'(s, t) = \begin{cases}
+        \overline{\alpha}(4s) & 0 \le s \le t/4 \\
+        H(1-t, \gamma(\frac{4s - t}{4 - 3t})) & t/4 \le s \le 1 - t/2 \\
+        \alpha(2s-1) & 1-t/2 \le s \le 1
+      \end{cases}
+  \end{equation}
+  Check that \( H' \) is a path homotopy of 
+  \( \alpha * (f \circ \gamma) * \overline{\alpha} \)
+  and \( g \circ \gamma \):
+      \begin{align*}
+        H'(0, t) = \overline{\alpha}(0) 
+                 = H(1, x_0) 
+                 = g(x_0)
+      \end{align*}
+      \begin{align*}
+        H'(1, t) = \alpha(1)
+                 = H(1, x_0)
+                 = g(x_0)
+      \end{align*}
+      \begin{align*}
+        H'(s, 0) =  \begin{cases}
+            \overline{\alpha} (4s) & 0 \le s \le 0 \\
+            H(1, \gamma(s)) & 0 \le s \le 1 \\
+            \alpha(2s - 1) & 1 \le s \le 1
+        \end{cases} 
+                 = H(1, \gamma(s))
+                 = (g \circ \gamma) (s)
+    \end{align*}
+      \begin{align*}
+        H'(s, 1) &= \begin{cases}
+            \overline{\alpha} (4s) & 0 \le s \le 1/4 \\
+            H(0, \gamma(4s - 1)) & 1/4 \le s \le 1/2 \\
+            \alpha(2s - 1) & 1/2 \le s \le 1
+          \end{cases} \\
+          &= \begin{cases}
+            \overline{\alpha} (4s) & 0 \le s \le 1/4 \\
+            f\left(\gamma(4s - 1)\right) & 1/4 \le s \le 1/2 \\
+            \alpha(2s - 1) & 1/2 \le s \le 1
+          \end{cases}
+          = (\alpha * (f \circ \gamma) * \overline{\alpha}) (s)
+      \end{align*}
+\end{proof}
+
+\begin{theorem}
+    Let \( f: X \to Y \) be a homotopy equivalence.
+    Then the map \[
+      \pi_1(f): \pi_1(X, x_0) \to \pi_1(Y, f(x_0))
+    \]
+    is a group isomorphism.
+\end{theorem}
+
+\begin{proof}
+  Since \( f \) is a homotopy equivalence
+  there exists a map \( g: Y \to X \)
+  and a homotopy between
+  \( g \circ f \) and \( \text{id}_X \).
+  By lemma \ref{lma:hom_diag_lemma}
+  we get the following diagram
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHBpXzEoWCwgeF8wKSJdLFsyLDAsIlxccGlfMShYLCAoZyBcXGNpcmMgZikoeF8wKSkiXSxbMiwyLCJcXHBpXzEoWCwgeF8wKSJdLFswLDEsIlxccGlfMShnIFxcY2lyYyBmKSJdLFswLDIsIlxccGlfMShcXHRleHR7aWR9KSIsMl0sWzEsMiwiXFxoYXR7XFxhbHBoYX0iXV0=
+  \[\begin{tikzcd}
+    {\pi_1(X, x_0)} && {\pi_1(X, (g \circ f)(x_0))} \\
+    \\
+    && {\pi_1(X, x_0)}
+    \arrow["{\pi_1(g \circ f)}", from=1-1, to=1-3]
+    \arrow["{\text{id}}"', from=1-1, to=3-3]
+    \arrow["{\hat{\alpha}}", from=1-3, to=3-3]
+  \end{tikzcd}\]
+  since \( \hat{\alpha} \circ \pi_1(g) \circ \pi_1(f) = \text{id}\),
+  \( \pi_1(f) \) is injective.
+  Next, since \( f \circ g \sim \text{id}_Y \)
+  we get
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHBpXzEoWSwgZih4XzApKSJdLFsyLDAsIlxccGlfMShZLCAoZiBcXGNpcmMgZyBcXGNpcmMgZikoeF8wKSkiXSxbMiwyLCJcXHBpXzEoWSwgeF8wKSJdLFswLDEsIlxccGlfMShmIFxcY2lyYyBnKSJdLFswLDIsIlxcdGV4dHtpZH0iLDJdLFsxLDIsIlxcaGF0e2V9Il1d
+    \[\begin{tikzcd}
+      {\pi_1(Y, f(x_0))} && {\pi_1(Y, (f \circ g \circ f)(x_0))} \\
+      \\
+      && {\pi_1(Y, x_0)}
+      \arrow["{\pi_1(f \circ g)}", from=1-1, to=1-3]
+      \arrow["{\text{id}}"', from=1-1, to=3-3]
+      \arrow["{\hat{e}}", from=1-3, to=3-3]
+    \end{tikzcd}\]
+
+    Here my notes are not easy to decode,
+    but I think the proof goes as follows:
+
+    So \( \hat{e} \circ \pi_1(f) \circ \pi_1(g) = \text{id} \),
+    hence \( \hat{e} \circ \pi_1(f) \) is surjective.
+    Since \( \hat{e} \) is just conjugation by a path
+    \( e \), \( \pi_1(f) \) is surjective.
+
+    Hence, \( \pi_1(f) \) is a bijection, 
+    and thus an isomorphism.
+\end{proof}
+

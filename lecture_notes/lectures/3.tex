@@ -1,0 +1,162 @@
+\section{Topological spaces: First definitions and examples}
+16.01
+
+\subsection{Topological spaces}
+
+\begin{definition}[Topological space]
+  \label{def:top_space}
+  A topological space is a pair \( (X, \tau) \),
+  where \( X \) is a set and \( \tau \subseteq \mathcal{P}(X) \)
+  is a collection of subsets of \( X \).
+  We call the elements in \( \tau \) the open sets in \( X \).
+  \( \tau \) satisfies
+
+  \begin{enumerate}
+    \item[T1)] \( \emptyset, X \subseteq \tau \).
+    \item[T2)] Given a collection \( \{U_i\}_{i \in I} \) of
+      open sets, then \( \bigcup_{i\in I} U_i\) is open.
+    \item[T3)] Given a finite collection \( \{V_j\}_{j \in J} \), \( \abs{J} < \infty \) of open sets, then \( \bigcap_{j\in J} V_j\) is open.
+  \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+   Let \( (X, d) \) be a metric space. Then \( X \) is a topological space
+   with \( \tau = \{ U \subseteq X \mid \forall x \in U, \exists \varepsilon > 0 \text{ s.t. } B(x, \varepsilon) \subseteq U \}  \).
+\end{proposition}
+
+\begin{proof} We show that the three axioms in \ref{def:top_space} are satisfied.
+   \begin{enumerate}
+     \item[T1)] Trivially true.
+     \item[T2)] Given \( \{ U_i \}_{i \in I}  \) such that \( U_i \subseteq \tau \) for all \( i \in I \).
+       Take some \( x \in \cup_{i\in I} U_i \). Then there exists some \( i_0 \) such that
+       \( x \in U_{i_0} \).
+       Since \( U_{i_0} \) is open there exists \( \varepsilon_{i_0} > 0 \) such that
+      \[
+        B(x, \varepsilon_{i_0}) \subseteq U_{i_0} \subseteq \bigcup_{i \in I } U_i.
+      \] 
+    \item[T3)] Given a finite index set \( J \) and \( \{ V_j  \}_{j \in J}  \) such that \( V_j \in \tau \) for all \( j \in J \).
+      Let \( x \in \cap_{j \in J} V_j \). Then \( x \in V_j \) for all \( j \in J \).
+      Let \( \varepsilon_j > 0 \) be such that \( B(x, \varepsilon_j) \subseteq V_j \).
+      Define \( \varepsilon = \min_j \varepsilon_j \).
+      Then
+      \[
+        B(x, \varepsilon_j) \subseteq \bigcap_{j \in J} V_j.
+      \]
+   \end{enumerate}
+\end{proof}
+
+\begin{example}
+   It is important that \( J \) is finite. 
+   Take \( X = \mathbb{R} \).
+   Let \( V_n = (-1/n, 1/n) \). Then 
+   \[
+     \bigcap_{n \in \mathbb{N}} V_n = \{ 0 \} \notin \tau.
+   \]
+\end{example}
+
+\begin{example}
+  Let \( X \) be a set and let \( \tau_{dis} = \mathcal{P}(X)\).
+  \( \tau_{dis} \) is a topology on \( X \).
+\end{example}
+
+\begin{example}
+  Let \( X \) be a set and let \( \tau_{ind} = \{ \emptyset, X \}  \).
+  \( \tau_{ind} \) is a topology on \( X \).
+\end{example}
+
+\begin{example}
+  Given \( (X, \tau) \), then \( (X, \tau) = (X, \tau_{dis}) \)
+  iff. \( \{ x\}  \) is open \( \forall x \in X \).
+\end{example}
+
+\begin{example}
+    Let \( X \) be a set and recall the discrete metric \( \delta_X: X \times X \to \mathbb{R} \).
+    Then \( X \) is equal to \( (X, \tau_{dis}) \) as a topological space.
+\end{example}
+
+\begin{example}
+    Let \( X \) be a set, and declare \( U \subseteq X \) to be open
+    if \( X \setminus U \) is finite.
+    We call the collection \( \tau_{cof} \) the cofinite topology.
+\end{example}
+
+\begin{example}
+  Let \( \hat{\mathbb{N}} = \mathbb{N} \cup \{ \infty \} \).
+  \( U \subseteq \hat{\mathbb{N}} \) is open if either
+  \( \infty \notin U \) or \( \infty \in U \) and \( U^\mathsf{c} \) is finite.
+\end{example}
+
+\begin{definition}[Neighbourhood]
+   Let \( (X, \tau) \) be a topological space.
+   Then \( U \subseteq X \) is a neighbourhood
+   if \( x \in U \) and \( U \) is open.
+\end{definition}
+
+\begin{theorem}
+   Let \( (X, \tau) \) be a topological space.
+   \( U \subseteq X \) is open iff. \( \forall x \in U \)
+   there exists a nbh.  \( V_x \)
+   of \( x \) such that \( V_x \subseteq U \).
+\end{theorem}
+
+\begin{proof} We show both directions.
+  \begin{enumerate}
+    \item[\( \Rightarrow \))] Assume \( U \) open. Then for all \( x \in U \)
+      \( U \) is a nbh. of \( x \) and \( U \subseteq U \).
+    \item[\( \Leftarrow \))] Assume that \( \forall x \in U \) there exists
+      nbhs. \( V_x \) such that \( V_x \subseteq U \). Then
+      \[
+        \bigcup V_x = U
+      \]
+      is open.
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}[Continuity]
+   A map of topological spaces \( f: X \to Y \)
+   is continuous if \( \forall V \subseteq Y\) open
+   then
+   \[
+    {f}^{-1} (V) \subseteq X
+   \]
+   is open in \( X \).
+\end{definition}
+
+\begin{example}
+  \( \text{id}: X \to X \) is cont. under the same topology.
+\end{example}
+
+\begin{example}
+    \( f:X \to Y, f(x) = y \forall x \in X \).
+    Let \( V \subseteq Y \). Then
+    \[
+      {f}^{-1} (V) = \begin{cases}
+        X & y \in V \\
+        \emptyset & y \notin V
+      \end{cases}
+    \]
+    and since \( \emptyset, X \in \tau \), \( f \) is continuous.
+\end{example}
+
+\begin{example}
+    \( f: X \to Y \), where \( X \) has the discrete topology.
+    \( f \) is continuous since all \( {f}^{-1} (V) \) are open in \( X \).
+\end{example}
+
+\begin{example}
+    \( f: X \to Y \), where \( Y \) has the indiscrete topology.
+    \( f \) is continuous since \( {f}^{-1} (Y) = X \) and \( {f}^{-1} (\emptyset) = \emptyset \)
+    are both opens.
+\end{example}
+
+\begin{nonexample}
+  \( f:(\mathbb{R}, \tau_E) \to (\mathbb{R}, \tau_{dis}) \) is not continuous
+  since \( {f}^{-1} (\{x\}) = \{x\} \) is not open wrt. \( \tau_E \).
+\end{nonexample}
+
+\begin{definition}[Coarser, finer]
+  Let \( X \) be a set, and let \( \tau_1, \tau_2 \)
+  be topologies on \( X \).
+  \( \tau_1 \) is coarser than \( \tau_2 \) if \( \tau_1 \subset \tau_2  \).
+  \( \tau_2 \) is finer than \( \tau_1 \) if \( \tau_2 \subset \tau_1  \).
+\end{definition}

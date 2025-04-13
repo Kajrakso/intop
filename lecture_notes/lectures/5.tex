@@ -1,0 +1,152 @@
+\section{Topological spaces: Continuous maps, homeomorphisms, closure, interior}
+23.01
+
+\begin{proposition}
+   \( f: X \to Y, g: Y \to Z \) cont.. Then \( g \circ f:X \to Z \) cont..
+\end{proposition}
+
+\begin{proof}
+    Let \( V \subseteq Y \) be open
+    and use that \( {(g \circ f)}^{-1} (V) = {g}^{-1} ({f}^{-1} (V)) \) is open.
+\end{proof}
+
+\begin{definition}[Homeomorphic topological spaces]
+   A pair \( X, Y \) of topological spaces are homeomorphic
+   if \( \exists \) cont. maps \( f: X \to Y, g: Y \to X \) such that
+   \( g \circ f = \text{id}_X \) and \( f \circ g = \text{id}_Y \).
+\end{definition}
+
+\begin{example}
+    Let \( X = \{ a, b \},
+    \tau_1 = \{ \emptyset, X, \{ a  \} \},
+    \tau_2 = \{ \emptyset, X, \{ b  \} \}
+    \).
+    Then
+\[
+  f: (X, \tau_1) \to (X, \tau_2)
+\]
+    is
+    a homeomorphism.
+\end{example}
+
+\textbf{Warning:} A homeomorphism is a continuous bijection,
+but a continuous bijection is not necessarily a homeomorphism.
+
+\begin{nonexample}
+  \( f: (\mathbb{R}, \tau_{dis}) \to (\mathbb{R}, \tau_{E}) \)
+  is a continous bijection, but not a homeomorphism.
+\end{nonexample}
+
+\begin{theorem}
+   Let \( X, Y, Z \) be topological spaces.
+   The relation of being homeomorphic (\( \sim \)) has the following properties:
+
+   \begin{enumerate}
+     \item \( X \sim X \)
+     \item \( X \sim Y \implies Y \sim X \)
+     \item \( X \sim Y, Y \sim Z \implies X \sim Z \)
+   \end{enumerate}
+\end{theorem}
+
+\begin{proof} Straightforward:
+   \begin{enumerate}
+     \item \( X \xrightarrow{\text{id}} X \) is a homeomorphism.
+     \item \( X \sim Y \). Then there exists continuous functions \( f, g \)
+       such that \( g \circ f = \text{id}_X, f \circ g = \text{id}_Y \).
+       So \( Y \sim X \).
+     \item \( X \sim Y, Y \sim Z \), then by composing arrows, we see that 
+        \( X \sim Z \).
+        % https://q.uiver.app/#q=WzAsMyxbMCwwLCJYIl0sWzIsMCwiWSJdLFs0LDAsIloiXSxbMCwxLCJmXzEiLDAseyJjdXJ2ZSI6LTN9XSxbMSwyLCJmXzIiLDAseyJjdXJ2ZSI6LTN9XSxbMiwxLCJnXzIiLDAseyJjdXJ2ZSI6LTN9XSxbMSwwLCJnXzEiLDAseyJjdXJ2ZSI6LTN9XV0=
+\[\begin{tikzcd}
+	X && Y && Z
+	\arrow["{f_1}", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow["{g_1}", curve={height=-18pt}, from=1-3, to=1-1]
+	\arrow["{f_2}", curve={height=-18pt}, from=1-3, to=1-5]
+	\arrow["{g_2}", curve={height=-18pt}, from=1-5, to=1-3]
+\end{tikzcd}\]
+   \end{enumerate}
+\end{proof}
+
+\begin{definition}[Closed space]
+   \( X \) top. space. \( Z \subseteq X \) is closed if
+   \( Z^\mathsf{c} = X \setminus Z\) is open.
+\end{definition}
+
+\begin{proposition}
+   \( X \) top. space. Then 
+   \begin{enumerate}
+     \item \( \emptyset, X \) is closed.
+     \item \( \{Z_i\}_{i \in I} \) a collection of closed subsets.
+       Then \( \bigcap_{i \in I} Z_i \) is closed. 
+     \item \( \{Z_j\}_{j \in J} \) a finite collection of closed subsets.
+       Then \( \bigcup_{j \in J} Z_j \) is closed. 
+   \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  We prove the three axioms in \ref{def:top_space}:
+  \begin{enumerate}
+    \item[T1)] \( \emptyset^\mathsf{c} = X \) is open and \( X^\mathsf{c} = \emptyset \) is open.
+    \item[T2)] 
+      \[
+        \left(\bigcap_{i\in I} Z_i\right)^\mathsf{c} = \bigcup_{i \in I  } Z_i ^ \mathsf{c}
+      \]
+      is open since \( Z_i ^ \mathsf{c} \) is open.
+    \item[T3)]
+      \[
+        \left(\bigcup_{j\in J} Z_j\right)^\mathsf{c} = \bigcap_{j \in J  } Z_j ^ \mathsf{c}
+      \]
+      is open since \( Z_j ^ \mathsf{c} \) is open and the intersection is finite.
+  \end{enumerate}
+\end{proof}
+
+\begin{example}
+  In \( (X, \tau_{dis}) \), everything is open and closed.
+\end{example}
+
+\begin{definition}[Closure, interior]
+   Let \( X \) be a a top. space and let \( A \subseteq X \).
+   The closure of \( A \) is 
+   \[
+     \overline{A} = \bigcap_{A \subseteq Z, Z \text{closed}} Z
+   \]
+    The interior of \( A \) is
+    \[
+      A^\circ =  \bigcup_{U \subseteq A, Z \text{open}} U
+    \]
+\end{definition}
+
+\begin{proposition}
+   \( X \) top. space. \( A \subseteq X \).
+   \( A \) is closed \( \iff \overline{A} = A \).
+   \( A \) is open \( \iff A^\circ = A \).
+\end{proposition}
+
+\begin{proof}
+  If \( \overline{A} = A \), then \( A \) is closed since it is a intersection of closed sets.
+  If \( A \) is closed, then
+  \[
+    \overline{A} = \bigcap_{\substack{A \subseteq Z \\ Z \text{ closed}}} Z
+    = A \cap \bigcap_{\substack{A \subseteq Z \\ Z \text{ closed} \\ A \neq Z}} Z = A
+  \]
+\end{proof}
+
+\begin{example}
+  In \( \mathbb{R} \): \( \overline{\left(a, b\right]} = [a, b] \).
+\end{example}
+
+\begin{definition}[Boundary point]
+   \( X \) top. space. \( A \subseteq X \).
+   \( x \in X \) is a boundary point of A if
+   \( \forall U \ni x \) nbh. of \( X \): 
+   \( U \cap A \neq \emptyset \) and 
+   \( U \cap A^\mathsf{c} \neq \emptyset \).
+\end{definition}
+
+\begin{definition}[Dense]
+  \( A \subseteq X \) is dense if \( \overline{A} = X \).
+\end{definition}
+
+\begin{example}
+    \( \mathbb{Q} \) is dense in \( \mathbb{R} \).
+\end{example}

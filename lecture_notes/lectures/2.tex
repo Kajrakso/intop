@@ -1,0 +1,158 @@
+\section{Metric spaces, continuous functions}
+10.01
+
+\subsection{Metric spaces}
+
+\begin{definition}[Metric Space]
+  A metric space is a pair \( (X, d) \), where \( X \) is a set
+  and \( d \) is a map \( d: X \times X \to \mathbb{R} \):
+  \begin{enumerate}
+    \item \( \forall x, y \in X : d(x, y) \ge 0 \) and \( d(x, y) = 0 \iff x = y \)
+    \item \( \forall x, y \in X : d(x, y) = d(y, x) \)
+    \item \( \forall x, y, z \in X : d(x, z) \ge d(x, y) + d(y, z) \)
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}[Continuity]
+  Let \( (X, d_X), (Y, d_Y) \) be metric spaces.
+  A map \( f: X \to Y \) is continuous at \( x \in X \)
+  if \( \forall \varepsilon > 0, \exists \delta > 0\) s.t.
+  \[
+    d_X(p, q) < \delta \implies d_Y(f(p), f(q)) < \varepsilon
+  \]
+\end{definition}
+
+\begin{definition}[Balls]
+   Let \( (X, d_X) \) be metric space and let 
+   \( p \in X \) and \( r > 0 \). We define the
+
+   \begin{enumerate}
+     \item[\(\cdot\)] \( B(p, r) = \{ x \in X \mid d(p, x) < r \}  \)
+     \item[\(\cdot\)] \( \overline{B}(p, r) = \{ x \in X \mid d(p, x) \le r \} \)
+   \end{enumerate}
+\end{definition}
+
+\begin{definition}[Open and closed subsets]
+   Let \( (X, d) \) be a metric space.
+   A subset \( U \subseteq X \) is open
+   if \( \forall p \in U, \exists \varepsilon > 0 \) s.t.
+   \[
+    B(p, \varepsilon) \subseteq U
+   \]
+   We say that \( Z \subseteq X \) is closed
+   if \( Z^\mathsf{c} = X \setminus Z \) is open.
+\end{definition}
+
+\begin{proposition}
+   Let \( (X, d) \) be a metric space.
+   Then \( B(x, r) \) is open and \( \overline{B}(x, r) \)
+   is closed \( \forall x \in X, \forall  r > 0 \).
+\end{proposition}
+
+\begin{proof}
+   We first show that \( B(x, r) \) is open.
+   Let \( y \in B(x, r) \). Define \( \varepsilon = r - d(x, y) > 0 \),
+   and consider \( z \in B(y, \varepsilon) \).
+   Then
+   \[
+    d(x, z) \le d(x, y) + d(y, z) < d(x, y) + \varepsilon = d(x, y) + r - d(x, y) = r,
+   \]
+   so \( B(y, \varepsilon) \subseteq B(x, r) \).
+
+ Next, we show that \( \overline{B}(x, r) \) is closed.
+ Need to show that \( \overline{B}(x, r)^{\mathsf{c}} \) is open.
+ Pick \( y \in \overline{B}(x, r)^{\mathsf{c}} \), and define \( \varepsilon = d(x, y) - r > 0 \).
+   Take \( z \in B(y, \varepsilon) \). Then
+   \[
+    d(x, y) \le d(x, z) + d(z, y) < d(x, z) + \varepsilon = d(x, z) + d(x, z) - r,
+   \]
+   so \( r < d(x, z) \). This shows that \( B(y, \varepsilon) \subseteq \overline{B}(x, r)^{\mathsf{c}} \).
+  \( \overline{B}(x, r) \) is thus closed.
+\end{proof}
+
+\begin{definition}[Neighbourhood]
+  Let \( (X, d) \) be a metric space.
+  \( B \subseteq X \) is a 
+  neighbourhood (nbh.) of \( p \in X \) if
+  \( \exists \varepsilon > 0 \) s.t. \( B(p, \varepsilon) \subseteq B \)
+\end{definition}
+
+\begin{theorem}
+  \label{thm:metric_spaces_cont_maps}
+  Let \( f: X \to Y \) be a map between metric spaces.
+  Then \( f \) is continuous at \( p \in X \) iff.
+  \( \forall B \) nbh. of \( f(p), \exists \) nbh. \( A \)
+  of \( p \) such that \( f(A) \subseteq B \).
+\end{theorem}
+
+\begin{proof}
+  We show both directions.
+   \begin{enumerate}
+     \item[\( \Rightarrow \))] Assume \( f \) is cont. as \( p \). Let \( B \) be a nbh. of \( f(p) \).
+       By definition of the nbh., there exists an \( \varepsilon > 0 \)
+       such that there exists a ball \( B(f(p), \varepsilon) \subseteq B \).
+       By continuity of \( f \) at \( p \), there exists a \( \delta > 0 \) such that
+       \[
+         d(p, y) < \delta \implies d(f(p), f(y)) < \varepsilon.
+       \]
+       That is, \( \forall y \in B(p, \delta) \)
+       we have that \( f(y) \in B(f(p), \varepsilon) \). Thus
+       \[
+        f(B(p, \delta)) \subseteq B(f(p), \varepsilon) \subseteq B
+       \]
+       So we have found a nbh. of p, namely \( B(p, \delta) \).
+
+     \item[\( \Leftarrow \))] Assume that for all nbh. \( B \) of \( f(p) \)
+        there exists a nbh. \( A \) of \( p \) s.t. \( f(A) \subseteq B \).
+        We need to show that \( f \) is continuous at \( p \).
+        Given \( \varepsilon > 0 \), consider the following nbh. of \( f(p) \):
+        \( B(f(p), \varepsilon) \). By assumption there exists a nbh. of \( p \), \( A \),
+        such that \( f(A) \subseteq B(f(p), \varepsilon) \).
+        \( A \) is a nbh., so there exists a \( \delta > 0 \) such that
+        \[
+          B(p, \delta) \subseteq A.
+        \]
+        Also 
+        \[
+          f(B(p, \delta)) \subseteq B(f(p), \varepsilon).
+        \]
+        Let \( z \in B(p, \delta) \). That is, \( d(p, z) < \delta \).
+        By the previous inclusion we get that \( d(f(p), f(z)) < \varepsilon \),
+        so \( f \) is continuous at \( p \).
+   \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+   A map of metric spaces \( f: X \to Y \) is continuous
+   at every point iff. \( V \subseteq Y \) open then 
+   \( {f}^{-1} (V) \subseteq X \) is also open.
+\end{theorem}
+
+\begin{proof}
+   We show both directions.
+   \begin{enumerate}
+     \item[\( \Rightarrow \))] 
+      Assume that \( f \) is continuous at every point in \( X \).
+      Take \( V \subseteq Y \) open. Let \( x \in {f}^{-1} (V) \).
+      Now \( V \) is a nbh. of \( f(x) \), and by theorem \ref{thm:metric_spaces_cont_maps}
+      there exists a nbh. \( A \) of \( x \) such that \( f(A) \subseteq V \).
+      So 
+      \[
+        B(x, \varepsilon) \subseteq A
+        \implies f(B(x, \varepsilon)) \subseteq f(A) \subseteq V
+        \implies B(x, \varepsilon) \subseteq {f}^{-1} (V)
+      \]
+
+     \item[\( \Leftarrow \))]
+       Let \( x \in X \), and let \( B \) be a nbh. of \( f(x) \).
+       Then there exists a ball \( B(f(x), \varepsilon) \subseteq B \).
+       By assumption \( {f}^{-1} (B(f(x), \varepsilon)) \) is open.
+       In particular \( {f}^{-1} (B(f(x), \varepsilon)) \) is a nbh. of \( x \).
+       In addition
+       \[
+        f({f}^{-1} (B(f(x), \varepsilon))) \subseteq B(f(x), \varepsilon)
+       \]
+        and so by theorem \ref{thm:metric_spaces_cont_maps} \( f \) is continuous
+        at \( x \). Since \( x \) was arbitrary, \( f \) is continuous everywhere.
+   \end{enumerate}
+\end{proof}

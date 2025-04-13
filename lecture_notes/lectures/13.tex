@@ -1,0 +1,130 @@
+\section{Compact spaces, product of compact spaces is compact.}
+
+\begin{proposition}
+    Let \( f: X \to Y \) be a continuous surjection.
+    If \( X \) is compact, then \( Y \) is compact.
+\end{proposition}
+
+\begin{proof}
+  Let \( \{ U_i \}_{i \in I}  \) be a cover of \( Y \).
+  Then \( \{ {f}^{-1} (U_i) \}_{i \ in I} \) is a cover of
+  \( X \) since \( f \) is continuous.
+  Now, \( X \) is compact, so there exists a finite refinement
+  of \( I \), say \( J \subseteq I \).
+  Now \( \bigcup_{j \in J} U_j = Y \)  since
+  \[
+    Y = f(X) = f\left(\bigcup_{j \in J} {f}^{-1}(U_j)\right)
+    = \bigcup_{j \in J} f\left({f}^{-1}(U_j)\right)
+    = \bigcup_{j \in J} U_j
+  \]
+\end{proof}
+
+\subsection{Product of compact spaces}
+
+\begin{lemma}[Tubular neighborhood lemma]
+   Let \( X, Y \) be topological spaces and let \( Y \) be compact.
+   Fix \( x \in X \) such that \( U \subseteq X \times Y \) is a open subset of \( X \times Y \)
+   and such that \( \{ x  \} \times Y \subseteq U  \).
+   Then there exists an open subset \( W_x \subseteq X \) such that \( x \in W_x \) and \( W_x \times Y \subseteq U \).
+\end{lemma}
+
+\begin{proof}
+  Since \( U \) is open, for all points \( (x, y) \),
+  where \( x \) is the fiexd point from the statement,
+  we have an open \( W_y \times V_y \subseteq U \).
+  Then \( \{ V_y \} _{y \in Y} \) is a cover of 
+  \( Y \). But \( Y \) is compact, so there exists
+  a finite number of points \( y_0, \dots, y_n \) such that
+  \[
+  Y = \bigcup_{i \in I} V_{y_i}
+  \]
+  Let \( W_x = \bigcap_{i \in I} W_{y_i} \).
+  \( W_x \) is open since \( I \) is finite.
+  Now
+  \[
+    W_x \times Y \subseteq \bigcup_{i \in I} W_x \times V_{y_i} \subseteq U
+  \]
+\end{proof}
+
+\begin{theorem}
+  Let \( X, Y \) be compact topological spaces.
+  Then \( X \times Y \) is compact.
+\end{theorem}
+
+\begin{proof}
+  Let \( \{ U_i \}_{i \in I}  \) be a cover of
+  \( X \times Y \).
+  Pick \( x \in X \). Now \( \{ x \} \times Y \simeq Y \),
+  and since \( Y \) compact and \( \{ U_i \}_{i \in I}  \)
+  covers \( \{ x \} \times Y \)
+  we have a finite refinement \( I_x \subseteq I \)
+  such that \(\{ x \} \times Y \subseteq  \bigcup_{i \in I_x} U_i \).
+  Define \( U_x = \bigcup_{i \in I_x} U_i \).
+
+  By the Tubular neighborhood lemma there exists
+  an open subset \( W_x \subseteq U_x \) such that
+  \( x \in W_x \) and \( W_x \times Y \subseteq U_x \).
+
+  \( x \) was arbitrary, so we get a cover of \( X \):
+  \( \{ W_x \}_{x \in X}  \). \( X \) is compact
+  so we pick a finite refinement \( j = 0, \dots, n \) such that
+  \( \bigcup_{j = 0}^n W_{x_j} = X \).
+
+  Then
+  \[
+    \bigcup_{j = 0}^n \bigcup_{i \in I_{x_j}} U_i
+    = \bigcup_{j = 0}^n U_{x_j}
+    \supseteq \bigcup_{j=0}^n W_{x_j} \times Y = X \times Y
+  \] 
+  And the double union on the left hand side
+  of the equation is finite since it is a
+  finite union of a finite union.
+\end{proof}
+
+\subsection{The closed interval is compact}
+
+\begin{theorem}
+  Let \( [a, b] \) ba a closed interval in \( \mathbb{R} \).
+  Then \( [a, b] \) is compact.
+\end{theorem}
+
+\begin{proof}
+    todo.
+\end{proof}
+
+\begin{definition}[boundedness]
+    Let \( (X, d) \) be a metric space.
+    Then \( A \subseteq X \) is bounded if there exists
+    a constant \( L > 0 \) such that \( d(x, y) < L \)  for all \( x, y \in A \).
+\end{definition}
+
+\begin{theorem}[Heine-Borel]
+  Let \( A \subseteq \mathbb{R}^n \) be a subspace of \( \mathbb{R}^n \).
+  Then \( A \) is compact iff. \( A \) is closed and bounded.
+\end{theorem}
+
+\begin{proof}
+    todo.
+    idea: \( \Leftarrow \) by building a square around \( A \). square is product of closed intervals, which are compact.
+\end{proof}
+
+\begin{theorem}[Generalised extreme value theorem]
+    Let \( f: X \to \mathbb{R} \) be a continuous map.
+    If \( X \) is compact then there exist \( m, M \in X \)
+    such that \( f(m) \le f(x) \le f(M) \) for all \( x \in X \).
+\end{theorem}
+
+\begin{proof}
+   todo. 
+\end{proof}
+
+Now we can argue that \( f: [0, 1] \to S^1, t \mapsto (\cos 2\pi t, \sin 2\pi t) \) is a quotient map:
+
+\begin{example}
+  Let \( Z \subseteq [0, 1]  \) be a closed subset of \( [0, 1] \).
+  Since \( [0, 1] \) is compact, \( Z \) is also compact.
+  Now \( f \) is a continuous surjection so \( f(Z) \) is compact.
+  \( S^1 \) is Hausdorff, so \( f(Z) \) has to be closed.
+  Thus \( f \) is closed and \( f \) is thus a quotient map.
+\end{example}
+

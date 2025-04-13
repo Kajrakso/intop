@@ -1,0 +1,226 @@
+\section{Connected spaces, path connectedness}
+13.02
+
+\begin{definition}[clopen]
+   Let \( X \) be a topological space.
+   \( U \subseteq X \) is clopen if it is both closed and  open.
+\end{definition}
+
+\begin{proposition}
+   Let \( X \) be a topological space.
+   \( X \) is connected iff. all the clopen subsets  are \( \emptyset \) and \( X \).
+\end{proposition}
+
+\begin{proof}
+   We prove both directions.
+   \begin{enumerate}
+     \item[\( \Rightarrow \))]
+       Assume \( X \) is connected.
+       Sps. there exist a clopen subset \( U \neq \emptyset \), \( U \neq X \).
+       Then \( X = U \cup U^\mathsf{c} \) is a separation.
+     \item[\( \Leftarrow \))]
+       Assume there does not exist clopen subset other than \( \emptyset \)
+       and \( X \).
+       Sps. there exists a separation \( X = U \cup V \).
+       Then \( U \) is clopen since \( U^\mathsf{c} = V \)
+       is clopen.
+   \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+  Let \( X \) be a topological space and
+  let \( \{0, 1\} \) be a discrete space of two points.
+  Then \( X \) is connected iff. every continuous map 
+  \( f: X \to \{0, 1\} \) is constant.
+\end{proposition}
+
+\begin{proof}
+  We show both directions.
+  \begin{enumerate}
+     \item[\( \Rightarrow \))]
+        Assume \( X \) is connected.
+        Sps. there exists a continuous non-constant map
+        \( f: X \to \{ 0, 1 \} \), where
+        \( \{ 0, 1  \}  \) is a discrete space.
+        Then \( {f}^{-1} (0) \) is clopen.
+        If \( {f}^{-1} (0) = \emptyset \), then \( f(X) = 1 \), so it is constant.
+        If \( {f}^{-1} (0) = X \), then \( f(X) = 0 \), so it is constant.
+        Hence, such a map \( f \) cannot exist.
+     \item[\( \Leftarrow \))]
+       Assume every continuous map \( f \) is constant.
+       Suppose \( X \) has a separation \( X = U \cup V \).
+       Consider
+       \[
+        f(x) = \begin{cases}
+          0 & x \in U \\ 
+          1 & x \in V \\ 
+        \end{cases}
+       \]
+        \( f \) is well defined since \( U \cap V = \emptyset \).
+        \( f \) is non-constant since \( U \neq \emptyset, V \neq \emptyset \).
+        \( f \) is continuous since \( {f}^{-1} (0) = U \) is open
+        and  \( {f}^{-1} (1) = V  \) is open.
+        Hence \( X \) cannot have a separation.
+  \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Let \( f: X \twoheadrightarrow Y\) be a continuous surjection of topological spaces.
+    If \( X \) is connected, then \( Y \) is connected.
+\end{proposition}
+
+\begin{proof}
+   Assume that \( X \) is connected.
+   Sps. there exists a separation of \( Y \), \( Y = U \cup V  \).
+   We show that \( {f}^{-1} (U) \cup {f}^{-1} (V) \) is a separation 
+   of \( X \).
+
+   \begin{enumerate}
+       \item
+         \( f \) is continuous, so \( {f}^{-1} (U), {f}^{-1} (V) \)
+         are both opens.
+       \item 
+          \( {f}^{-1} (U) \neq \emptyset, {f}^{-1} (V) \neq \emptyset \)
+          since \( f \) surjective.
+        \item
+          \( {f}^{-1} (U) \neq X, {f}^{-1} (V) \neq X \)
+          since \( f \) surjective.
+        \item 
+          \( {f}^{-1} (U) \cup {f}^{-1} (V) = {f}^{-1} (U \cup V) = {f}^{-1} (Y) = X \)
+        \item
+          \( {f}^{-1} (U) \cap {f}^{-1} (V) = {f}^{-1} (U \cap V) = {f}^{-1} (\emptyset) = \emptyset \)
+   \end{enumerate}
+    So \( {f}^{-1} (U), {f}^{-1}(V) \) forms a separation of \( X \),
+    which is a contradiction. Hence \( Y \) is connected.
+\end{proof}
+
+\begin{definition}[connected subspace]
+   Let \( X \) be a topological space and let \( A \subseteq X \).
+   \( A \) is a connected subspace of \( X \) if \( A \) is connected in
+   the subspace topology.
+\end{definition}
+
+\begin{lemma}
+    Let \( A \subseteq X \) be a connected subspace.
+    Assume \( X = U \cup V \) is a separation of \( X \).
+    Then \( A \subseteq U \) or \( A \subseteq V \).
+\end{lemma}
+
+\begin{proof}
+   Suppose \( A \subsetneq U \) and \( A \subsetneq V \).
+   Define \( A_U = A \cap U, A_V = A \cap V \).
+   Then \( A_U, A_V \) forms a separation of \( A \).
+   \begin{enumerate}
+     \item \( A_U, A_V \neq \emptyset \) since \( A, U, V \neq \emptyset \)
+        and \( U, V \) forms a separation of \( X \).
+     \item \( A_U, A_V \) are opens since \( A, U, V \) opens.
+     \item \( A_U \cup A_V = (A \cap U) \cup (A \cap V) = A \cap (U \cup V) = A  \).
+     \item \( A_U \cap A_V = (A \cap U) \cap (A \cap V) = A \cap (U \cap V) = \emptyset  \).
+   \end{enumerate}
+\end{proof}
+
+\begin{lemma}
+  Let \( \{ A_\lambda \}_{\lambda \in \Lambda}  \) be a family of
+  connected subspaces of \( X \), such that
+  \[
+    \bigcap_{\lambda \in \Lambda} A_\lambda \neq \emptyset
+  \]
+  Then,
+  \( \bigcup_{\lambda \in \Lambda} A_\lambda \)
+  is a connected subspace of \( X \).
+\end{lemma}
+
+\begin{proof}
+  Sps. \( \bigcup_{\lambda \in \Lambda} A_\lambda \) has a separation
+  \( U, V \). Take \( p \in \bigcap_{\lambda \in \Lambda} A_\lambda \).
+  Since each \( A_{\lambda} \) is connected,
+  each \( A_\lambda \) is either contained in \( U \) 
+  or in \( V \). Without loss of generality we can assume that
+  \( p \in  U \).
+  Then \( A_\lambda \subseteq U \) for all \( \lambda \in \Lambda \),
+  so \( V = \emptyset \). Contradiction, so \( U, V \) is not a separation.
+  Hence \( \bigcup_{\lambda \in \Lambda} A_\lambda \)
+  is connected.
+\end{proof}
+
+\begin{theorem}
+   Given connected topological spaces \( X, Y \).
+   Then \( X \times Y \) is connected.
+\end{theorem}
+
+\begin{proof}
+  Note that \( \{ x \} \times Y \) and \( X \times \{ y \}  \)
+  are connected for all \( x \in X, y \in Y \).
+  Observe that \( \{ x_0 \} \times Y  \cup ( X \times \{ y \} ) \)
+  is connected since \( \{ x_0 \} \times Y  \cap ( X \times \{ y \} ) \neq \emptyset \).
+  Pick some \( x_0 \in X \), and define \( A_y = \{ x_0 \} \times Y  \cup ( X \times \{ y \} ) \) for all \( y \in Y \). Now,
+  \begin{enumerate}
+    \item \( \bigcup_{y \in Y} A_y = X \times Y \) since
+      given \( (x, y) \in X \times Y \), then \( (x, y) \in A_y \).
+    \item \( \bigcap_{y \in Y} A_y \neq \emptyset \) since
+    \( \{ x_0 \} \times Y \in A_y \) for all \( A_y \).
+  \end{enumerate}
+\end{proof}
+
+\begin{example}
+   \( \mathbb{R} \) connected \( \implies \mathbb{R}^n \) connected. 
+\end{example}
+
+\begin{theorem}
+    \( \mathbb{R}  \) is connected.
+\end{theorem}
+
+\begin{proof}
+    todo.
+\end{proof}
+
+\begin{theorem}[Generalized Intermediate Theorem]
+  Let \( X \) be a connected topological space.
+  Let \( f: X \to \mathbb{R} \) be continuous.
+  Given \( a, b \in \mathbb{R} \) such that \( \exists r\in \mathbb{R} \)
+  such that \( f(a) < r < f(b) \).
+  Then \( \exists \alpha \in X \) such that \( f(\alpha) = r \).
+\end{theorem}
+
+\begin{proof}
+   todo. 
+\end{proof}
+
+\begin{definition}[path]
+   A path in a topological space \( X \)
+   is a continous map \( \gamma: [0, 1] \to X \).
+\end{definition}
+
+\begin{definition}[path connected]
+   A topological space \( X \) is path connected
+   if \( \forall x, y \in X \) there exists a path
+   \( \gamma \) such that \( \gamma(0) = x \) and \( \gamma(1) = y \).
+\end{definition}
+
+\begin{proposition}
+    Let \( X \) be a topological space.
+    If \( X \) is path connected, then \( X \) is connected.
+\end{proposition}
+
+\begin{proof}
+   Assume that \( X \) is path connected.
+   Sps. that \( X = U  \cup V \) is a separation
+   of \( X \).
+   Then there exists points \( x \in U, y \in V \).
+   Since \( X \) is path connected, there exists
+   a path \( \gamma: I \to X \) such that
+   \( \gamma(0) = x, \gamma(1) = y \).
+   Now, consider the image of \( \gamma \).
+   Since \( I \) is connected
+   and \( \gamma  \) is continuous and surjective
+   onto its image, \( \gamma ([0, 1]) \) is also
+   connected.
+   Since \( U \cup V\) is a separation of \( X \),
+  \( \gamma(I) \subseteq U \) without
+   loss of generality.
+    So \( \gamma(1) = y \in U \), which is a contradiction
+    since \( y \in V \) and \( U \cap V = \emptyset \).
+    Hence, \( X \) has to be connected.
+\end{proof}
+
+

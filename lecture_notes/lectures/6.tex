@@ -1,0 +1,246 @@
+\section{Basis of a topology, subspace topology}
+24.01
+
+\begin{proposition}
+  Let \( f: X \to Y \) be a map of topoligical spaces.
+  Then TFAE:
+
+  \begin{enumerate}
+    \item \( f \) is continuous.
+    \item For all closed subsets \( Z \subseteq Y \), \( {f}^{-1} (Z) \) is also closed.
+    \item For all subsets \( A \subseteq X \), \( f(\overline{A}) \subseteq \overline{f(A)} \).
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Let us show that proposition \( 1 \) is equivalent to proposition \( 2 \).
+
+    Take \( Z \subseteq Y \) closed. Then \( Z^\mathsf{c} \) is open,
+    so \( {f}^{-1} (Z^\mathsf{c}) = ({f}^{-1} (Z))^\mathsf{c} \) is open
+    iff. \( f \) is continuous. Thus \( {f}^{-1} (Z) \) is closed for all 
+    closed subsets \( Z \subseteq Y \).
+
+    Let us show that \( 2 \) is equivalent to \( 3 \).
+    \begin{enumerate}
+      \item[\( \Rightarrow \))]
+        Note that \( \overline(f(A)) \) is closed,
+        so \( {\overline{f(A)}}^{-1}  \) is also closed.
+        We have that
+        \[
+          A \subseteq {f}^{-1} (f(A)) \subseteq {f}^{-1} (\overline{f(A)})
+        \]
+        and since \( \overline{A} \) is the smallest closed
+        set that contains \( A \) we get that
+        \[
+          \overline{A} \subseteq {f}^{-1} (\overline{f(A)}).
+        \]
+        Applying \( f \) at both sides yields
+        \[
+          f(\overline{A}) \subseteq \overline{f(A)}.
+        \]
+      \item[\( \Leftarrow \))]
+        Assume that \( \forall A \subseteq X \) we have \( f(\overline{A}) \subseteq \overline{f(A)} \).
+        Take \( Z \subseteq Y \) closed. Consider \( {f}^{-1} (Z) \subseteq X \) and use the assumtion:
+        \[
+          f(\overline{{f}^{-1} (Z)}) \subseteq \overline{ f({f}^{-1} (Z))} = \overline{Z} = Z.
+        \]
+        So
+        \[
+          \overline{{f}^{-1} (Z)} \subseteq {f}^{-1} (Z)
+        \]
+        but obviously \(\overline{{f}^{-1} (Z)} \subseteq {f}^{-1} (Z) \),
+        so \( \overline{{f}^{-1} (Z)} = {f}^{-1} (Z) \), and hence
+        \( {f}^{-1} (Z)  \) is closed.
+    \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+  Let \( X \) be a set and let \( \tau_1 \) and \( \tau_2 \)
+  be topologies on \( X \). Then \( \tau_1 \cap \tau_2 \) is
+  a topology on \( X \).
+\end{proposition}
+
+\begin{proof}
+  Use that every open is in the intersection of \( \tau_1 \) and \( \tau_2 \),
+  so in exploit that \( \tau_i \) is a topology.
+\end{proof}
+
+Given a set \( X \), and topologies \( \tau_1, \tau_2 \) on \( X \).
+Then \( \tau_1 \cup \tau_2 \) is in general not a topology on \( X \).
+
+\begin{nonexample}
+  Let \( X = \{ a, b, c  \}  \) and define two topologies on \( X \):
+  \[
+    \tau_1 = \{ \emptyset, X, \{ a \}, \{ a, b \} \}
+  \]
+  and 
+  \[
+    \tau_1 = \{ \emptyset, X, \{ c \}, \{ b, c \} \}.
+  \]
+  Then
+  \[
+    \tau_1 \cup \tau_2 = \{ \emptyset, X, \{ a \}, \{ c \}, \{ a, b \}, \{ b, c \} \}
+  \]
+  is not a topology on \( X \).
+\end{nonexample}
+
+\begin{definition}{(Basis)}
+  Let \( \mathscr{B} \subseteq \mathcal{P}(X) \).
+  We say that \( \mathscr{B} \) is a basis
+  for a topology on \( X \) if the following
+  holds:
+
+  \begin{enumerate}
+    \item[B1)] \( \forall x \in X, \exists B \in \mathscr{B} \)
+      s.t. \( x \in B \).
+    \item[B2)] Given \( B_1, B_2 \in \mathscr{B} \) and \( x \in B_1 \cap B_2,
+      \exists B_3 \in \mathscr{B} \) s.t. \( x \in B_3 \subseteq B_1 \cap B_2 \).
+  \end{enumerate}
+   
+\end{definition}
+
+\begin{proposition}
+  Let \( \mathscr{B} \) be a basis for a topolopy on \( X \)
+  and let
+  \[
+    \tau = \{U \subseteq X \mid \forall x \in U, \exists B \in \mathscr{B} \text{ s.t. } x \in B \subseteq U \}
+  \]
+  Then \( \tau \) defines a topology on \( X \).
+\end{proposition}
+
+\begin{proof}
+  We show the three axioms.
+  \begin{enumerate}
+    \item[T1)] \( \emptyset \in \tau \) is trivial. \( X \in \tau \) follows immediatly from the definition of a basis.
+    \item[T2)] Let \( \{  U_i  \}_{i \in I}  \) be a collection of opens.
+      Then for \( x \in \bigcup U_i \) there exists a \( i_0 \) such that
+      \( x \in U_{i_0} \). Since \( U_{i_0} \) is open, there exists
+      a basis element \( B \in \mathscr{B} \) such that
+      \( x \in B \subseteq U_{i_0} \). So immediatly
+      \[
+        x \in B \subseteq U_{i_0} \subseteq \bigcup_{i \in I} U_i
+      \]
+      and  \( \bigcup U_i \) is therefore open.
+    \item[T3)]
+      Let \( \{ V_j  \}_{j \in J}  \) be a finite collection of opens.
+      Take some \( x \in \bigcap V_j \). Use induction on \( \abs{J} = n \).
+
+      Base case: \( n = 2 \).
+      \[
+        x \in V_1 \cap V_2
+      \]
+      Then there exists \( B_1, B_2 \in \mathscr{B} \) such that
+      \( x \in B_i \subseteq V_i \). So 
+      \[
+        x \in B_1 \cap B_2 \subseteq V_1 \cap V_2
+      \]
+      Then by B2) there exists some \( B_3 \in \mathscr{B} \)
+      such that
+      \[
+        x \in B_3 \subseteq B_1 \cap B_2 \subseteq V_1 \cap V_2
+      \]
+
+      Induction step: \( n-1 \mapsto n \).
+      \[
+        x \in \bigcap_{j=1}^{n-1} V_j \cap V_n
+      \]
+      By the induction hypothesis there exists
+      some \( B \in \mathscr{B} \) such that
+      \[ x \in B \subseteq \bigcap_{j=1}^{n-1} V_j \]
+      Also, there exists \( B_2 \in \mathscr{B} \) such that
+      \( x \in B_2 \subseteq V_n \). Then, by B2) there exists
+      \( B_3 \in \mathscr{B} \) such that
+      \[
+        x \in B_3 \subseteq B_1 \cap B_2 \bigcap_{n=1}^{n-1} V_j \cap V_n
+      \]
+  \end{enumerate}
+\end{proof}
+
+\begin{example}
+  Given a basis \( \mathscr{B} \) for \( X \).
+  Then \( U \subseteq X \) is open iff.
+  \[ U = \bigcap_{i\in I} B_i, B_i \in \mathscr{B} \forall i \in I \].
+\end{example}
+
+\begin{proposition}
+  Let \( f: X \to  Y \) be a map, and suppose
+  that \( \mathscr{B} \) is a basis for a topology
+  on \( Y \). Then \( f \) is continuous iff.
+  \( {f}^{-1}(B) \) is open in \( X, \forall B \in \mathscr{B}  \).
+\end{proposition}
+
+\begin{proof}
+  We show both directions
+  \begin{enumerate}
+    \item[\( \Rightarrow \))]
+      This direction is obvious.
+    \item[\( \Leftarrow \))]
+      Take \( U \subseteq X \) open. Write \( U = \bigcup B_i \).
+      Then
+      \[
+        {f}^{-1} (U) = {f}^{-1} \left(\bigcup B_i\right) = \bigcup {f}^{-1} \left(B_i\right)
+      \]
+      is open since \( {f}^{-1} (B_i) \) is open.
+  \end{enumerate}
+\end{proof}
+
+\subsection{Constructing topological spaces}
+
+\subsection{Subspaces}
+
+\begin{proposition}
+  Let \( X \) be a topological space.
+  Let \( A \subset X \) be a proper subset.
+  Then the collection
+  \[
+    \tau_A = \{U \cap A \mid U \text{ open in } X\}
+  \]
+  is a topology on \( A \).
+\end{proposition}
+
+\begin{proof}
+  We show the three axioms
+  \begin{enumerate}
+    \item[T1)]
+      Obvious.
+    \item[T2)]
+      Take a collection of opens: \( \{ U_i \cap A \}  \). Then
+      \[
+        \bigcup_{i\in I} U_i \cap A = A \cap  \bigcup_{i\in I} U_i \in \tau_A
+      \]
+    \item[T3)]
+      Take a finite collection of opens: \( \{ V_j \cap A \}  \). Then
+      \[
+        \bigcap_{j\in J} V_j \cap A = A \cap  \bigcap_{j\in J} V_j \in \tau_A
+      \]
+  \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+  Let \( X \) be a topological space.
+  Let \( A \subseteq X \) be a subset.
+  Then \( L \subseteq A \) is closed in the subspace topology
+  on \( A \) iff. \( \exists K \subseteq X \) which is closed
+  and such that \( K \cap A = L \).
+\end{proposition}
+
+\begin{proof}
+   Observe that \( L \subseteq A \) is closed 
+   \( \iff A \setminus L \) open
+   \( \iff \exists U \subseteq X \) open s.t. \( U \cap A = A \setminus L \).
+
+   \begin{enumerate}
+     \item[(\(\Rightarrow\))] Let \( K = U^\mathsf{c} = X \setminus U \).
+       Then 
+       \[
+        K \cap A = (X \setminus U) \cap A = A \setminus (A \cap U) = A \ (A \setminus L) = L
+       \]
+     \item[(\( \Leftarrow \))] Let \( K \subseteq X \) be closed and such that \( K \cap A = L \).
+       Need to show that \( A \setminus L \) is open under the subspace topology.
+       Consider \( U = K^{\mathsf{c}} = X \setminus K\). \( U \) is open.
+       \[
+         U \cap A = (X \setminus K) \cap A = (A \setminus (K \cap A)) \cap A = (A \setminus L) \cap A = A \setminus L
+       \]
+
+   \end{enumerate}
+\end{proof}
