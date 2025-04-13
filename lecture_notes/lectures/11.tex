@@ -171,19 +171,73 @@
 \end{theorem}
 
 \begin{proof}
-    todo.
+    Suppose \( \mathbb{R} = U \cup V \)
+    is a separation of \( \mathbb{R} \).
+    In particular, we have \( a \in U, b \in V \)
+    such that \( a < b \).
+    Let \( A = [a, b] \cap U, B = [a, b] \cap V \).
+    So, \( a \in A, b \in B \)
+    and \( b \) is an upper bound for \( A \).
+    So \( c = \sup A \) is such that
+    \[
+      a \le c \le b
+    \]
+    Observe that
+    \begin{align*}
+      A \cup B &= ([a, b] \cap U) \cup ([a, b] \cap V) = [a, b] \\
+      A \cap B &= ([a, b] \cap U) \cap ([a, b] \cap V) = \emptyset
+    \end{align*}
+    So \( c \in A \cup B \), which implies \( c \in A \) or \( c \in B \).
+    Goal: Show that \( c \not\in A \) and \( c \not\in B \),
+    which is a contradiction and hence \( \mathbb{R} \) is connected.
+
+    Suppose \( c \in B \). Then \( c \neq a \).
+    Since \( B \) is open in \( [a, b] \) there exists
+    some \( d \) such that \( (d, c] \subseteq B \).
+    Then \( A \cap (d, c] \neq \emptyset \), which is a contradiction.
+
+    Suppose \( c \in A \). Since \( A \) open in \( [a, b] \)
+    there exists some \( d \) such that \( \emptyset \neq [c, d) \subseteq A \).
+    But \( d \le c \) since \( c = \sup A \), which is a contradiction.
+
+    Hence, \( \mathbb{R} \) is connected.
 \end{proof}
+
 
 \begin{theorem}[Generalized Intermediate Theorem]
   Let \( X \) be a connected topological space.
   Let \( f: X \to \mathbb{R} \) be continuous.
   Given \( a, b \in \mathbb{R} \) such that \( \exists r\in \mathbb{R} \)
-  such that \( f(a) < r < f(b) \).
+  such that \[ f(a) < r < f(b) \]
   Then \( \exists \alpha \in X \) such that \( f(\alpha) = r \).
 \end{theorem}
 
 \begin{proof}
-   todo. 
+   Suppose no such \( \alpha \) exists.
+   Define
+   \begin{align}
+     U_{< r} &= {f}^{-1} \left((-\infty, r)\right) \\
+     U_{> r} &= {f}^{-1} \left((r, +\infty)\right)
+   \end{align}
+   Claim: \( X = U_{<r} \cup U_{>r} \) is a separation
+   of \( X \).
+    \begin{enumerate}
+        \item
+          \( a \in U_{<r}, b \in U_{>r} \) so
+          they are non empty.
+        \item
+          \( b \not\in U_{<r}, a \not\in U_{>r} \)
+          so they are not \( X \).
+        \item
+          \( U_{<r} \cap U_{>r} = \emptyset \)
+          since if \( c \in U_{<r} \cap U_{>r} \) then
+          \( c < r \) and \( c > r \) which is a contradiction.
+        \item
+          \( U_{<r} \cup U_{>r} = X\)
+          since \( {f}^{-1} (\mathbb{R}) = X \).
+    \end{enumerate}
+   Hence, \( U_{<r} \cup U_{>r} = X \) is a separation, but
+   \( X \) was assumed to be connected which is a contradiction.
 \end{proof}
 
 \begin{definition}[path]

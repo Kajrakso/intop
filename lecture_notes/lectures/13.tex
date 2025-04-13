@@ -89,7 +89,42 @@
 \end{theorem}
 
 \begin{proof}
-    todo.
+  Let \( \{ U_i \} _{i \in I} \) be a cover of \( [a, b] \).
+  Define
+  \[
+    S := \{ x \in [a, b] \mid [a, x] \text{covered by finitely many \( i \)-s in \( I \)} \} 
+  \]
+  Goal: Show that \( b \in S \).
+
+  Observe that \( S \) is non-empty since \( a \in S \).
+  Furthermore, \( S \) is bounded above by \( b \).
+  Let \( c = \sup S \). We will show that \( c \in S \)
+  and that \( c = b \).
+  \begin{enumerate}
+    \item \( c \in S \).
+      
+      \( a < c \le b \) since \( U_{i_0} = [a, a+\epsilon) \ni a \).
+      We can find \( \epsilon > 0 \) such that \( (c-\epsilon, c \ \epsilon) \subseteq U_{i_\alpha} \).
+      Since \( c = \sup S \) there exists \[ x \in (c - \epsilon, c + \epsilon) \] with \( x \in S \).
+      So \( [a, x] \) is covered by finitely many \( U_i \)-s.
+      Also \[ c \in (c - \epsilon, c + \epsilon) \] so 
+      \( [a, x] \cup [x, c] \) is covered by finitely many
+      \( U_i \)-s. Thus \( c \in S \).
+
+    \item \( c = b \).
+
+        Suppose \( c < b \). Then there exists
+        \( \epsilon > 0 \) such that
+        \[
+          (c - \epsilon, c + \epsilon) \subseteq U_{i_\alpha}
+        \]
+        And \( c + \epsilon < b \).
+        Same argument as before shows that
+        \( \exists \epsilon' < \epsilon \) such that
+        \( c + \epsilon' \in S \). But \( c = \sup S \)
+        and \( c + \epsilon' > c \), which is a contradiction.
+  \end{enumerate}
+  So \( c = b \in S \), hence \( [a, b] \) compact.
 \end{proof}
 
 \begin{definition}[boundedness]
@@ -104,8 +139,32 @@
 \end{theorem}
 
 \begin{proof}
-    todo.
-    idea: \( \Leftarrow \) by building a square around \( A \). square is product of closed intervals, which are compact.
+  We show both directions.
+  \begin{enumerate}
+    \item[\( \Rightarrow \))]
+      Assume \( A \subseteq \mathbb{R} \) is compact.
+      Consider the cover \( \{ B(a, n) \}_{n \in \mathbb{N}}  \).
+      Since \( A \) compact there exists a finite refinement
+    \( N \in \mathbb{N} \) such that
+    \[
+      A \subseteq B(a, N) = \bigcup_{n = 0}^N B(a, n)
+    \]
+    Then \( A \) is bounded. \( A \) is closed since \( \mathbb{R}^n \)
+    is closed.
+    \item[\( \Leftarrow \))]
+      Suppose \( A \) is closed and bounded.
+      Since \( A \) is bounded there exists
+      some \( L \) such that \( d(a, b) < L \)
+      for all \( a, b \in A \).
+      Define
+      \begin{equation}
+        P = \prod_{i}^n \left[a_i - L, a_i + L\right] \subseteq \mathbb{R}^n
+      \end{equation}
+      \( P  \) is a finite product of closed intervals,
+      and since the closed interval is compact, \( P \) 
+      is compact. Then \( A \subseteq P \) is closed,
+      and hence it is compact in \( P \).
+  \end{enumerate}
 \end{proof}
 
 \begin{theorem}[Generalised extreme value theorem]
@@ -115,7 +174,18 @@
 \end{theorem}
 
 \begin{proof}
-   todo. 
+   Note that \( f(X) \subseteq \mathbb{R} \) is
+   a compact subspace of \( \mathbb{R} \).
+   So by Heine-Borel, \( f(X) \) is closed and bounded.
+   There exists \( \alpha, \beta \) such that
+   \[
+    \alpha \le f(X) \le \beta
+   \]
+   Since \( \inf f(X), \sup f(X) \in \overline{f(X)} \)
+   and \( f(X) \) is closed we get
+   \[
+    \inf f(X), \sup f(X) \in f(X)
+   \]
 \end{proof}
 
 Now we can argue that \( f: [0, 1] \to S^1, t \mapsto (\cos 2\pi t, \sin 2\pi t) \) is a quotient map:
